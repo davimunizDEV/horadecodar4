@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Estudantes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #resultado {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Estudantes</h1>
+    <input type="text" id="nomeEstudante" placeholder="Digite o nome do estudante">
+    <button onclick="cadastrarEstudante()">Cadastrar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        let estudantes = [];
+
+        function cadastrarEstudante() {
+            const input = document.getElementById("nomeEstudante").value.trim();
+
+            if (input.toUpperCase() === "PARE") {
+                exibirResultado();
+                return;
+            }
+
+            if (input) {
+                estudantes.push(input);
+                document.getElementById("nomeEstudante").value = ''; // Limpa o campo de entrada
+                alert("Estudante cadastrado: " + input);
+            } else {
+                alert("Por favor, insira um nome válido.");
+            }
+        }
+
+        function exibirResultado() {
+            const resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = `<h2>Total de Estudantes: ${estudantes.length}</h2>`;
+            if (estudantes.length > 0) {
+                resultadoDiv.innerHTML += `<h3>Lista de Estudantes:</h3><ul>${estudantes.map(est => `<li>${est}</li>`).join('')}</ul>`;
+            }
+            // Limpa o campo de entrada após parar
+            document.getElementById("nomeEstudante").value = '';
+        }
+    </script>
+</body>
+</html>
